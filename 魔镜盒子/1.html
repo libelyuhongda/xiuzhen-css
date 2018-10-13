@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<style type="text/css">
+		body{
+			margin: 0; padding: 0;
+			background-color: #68cdd5;
+		}
+		.content-box{
+			width: 100%; height: 100%;
+		}
+		.content-box .title{
+			margin: 1.14rem 2.58rem 0 2rem;
+			height: 0.87rem; width: 1.84rem;
+		}
+		.content-box .text{
+			font-size: 36px; line-height: 1.8;
+			margin: 1.2rem 1.02rem 0 0.9rem;
+		}
+		.content-box .logo{
+			margin-top: 1.76rem;position: relative;
+			height: 2rem;
+		}
+		.content-box .logo img:first-child{
+			position: absolute; top: 0;
+			left:1.4rem;
+		}
+		.content-box .logo img:last-child{
+			position: absolute; top: 0;
+			right:1.23rem;
+		}
+	</style>
+	<script>
+		(function(doc, win) {
+		    var docEl = doc.documentElement,
+		        isIOS = navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/),
+		        dpr = isIOS ? Math.min(win.devicePixelRatio, 3) : 1,
+		        dpr = window.top === window.self ? dpr : 1, //被iframe引用时，禁止缩放
+		        dpr = 1,
+		        scale = 1 / dpr,
+		        resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize';
+		    docEl.dataset.dpr = dpr;
+		    var metaEl = doc.createElement('meta');
+		    metaEl.name = 'viewport';
+		    metaEl.content = 'initial-scale=' + scale + ',maximum-scale=' + scale + ', minimum-scale=' + scale;
+		    docEl.firstElementChild.appendChild(metaEl);
+		    var recalc = function() {
+		        var width = docEl.clientWidth;
+		        if (width / dpr > 750) {
+		            width = 750 * dpr;
+		        }
+		        // 乘以100，px : rem = 100 : 1
+		        docEl.style.fontSize = 100 * (width / 640) + 'px';
+		    };
+		    recalc()
+		    if (!doc.addEventListener) return;
+		    win.addEventListener(resizeEvt, recalc, false);
+		})(document, window);
+	</script>
+<body>
+	<div class="content-box">
+		<img src="images/title.png" class="title">
+		<p class="text">葡萄藤请游戏专注于周游领域，提供在线杀人游戏，卓贵，渣浪报等多种聚会游戏，在下线上聚会周游道具</p>
+		<div class="logo">
+			<img src="images/logo1.png">
+			<img src="images/logo2.png">
+		</div>
+	</div>
+</body>
+</html>
